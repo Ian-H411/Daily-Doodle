@@ -13,31 +13,40 @@ struct DrawingView: View {
     let penColors: [Color] = [.black, .red, .green, .blue, .orange]
     
     var body: some View {
-        HStack {
-            // Left side: Canvas for drawing
-            CanvasView(drawing: $drawing, penColor: selectedColor)
-                .background(Color.black)
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            drawing.addPoint(point: value.location)
-                        }
-                )
-                .border(Color.black, width: 1)
-            
-            // Right side: Panel for selecting pen color
-            VStack {
-                Text("Pen Colors")
-                    .font(.headline)
-                    .padding()
-                ForEach(penColors, id: \.self) { color in
-                    ColorButton(color: color, isSelected: color == selectedColor)
-                        .onTapGesture {
-                            selectedColor = color
-                        }
+        NavigationView {
+            HStack {
+                ZStack {
+                    // Left side: Canvas for drawing
+                    Rectangle()
+                    .stroke(Color.black, lineWidth: 2) // Border
+                    .background(Color.white)
+                    CanvasView(drawing: $drawing, penColor: selectedColor)
+                        .background(Color.white)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    drawing.addPoint(point: value.location)
+                                }
+                        )
+                        .border(Color.black, width: 5)
+                        .frame(width: 100, height: 280, alignment: .leading)
                 }
+
+                // Right side: Panel for selecting pen color
+                VStack {
+                    Text("Pen Colors")
+                        .font(.headline)
+                        .padding()
+                    ForEach(penColors, id: \.self) { color in
+                        ColorButton(color: color, isSelected: color == selectedColor)
+                            .onTapGesture {
+                                selectedColor = color
+                            }
+                    }
+                }
+                .padding()
+                .frame(width: 130, alignment: .trailing)
             }
-            .padding()
         }
     }
 }
