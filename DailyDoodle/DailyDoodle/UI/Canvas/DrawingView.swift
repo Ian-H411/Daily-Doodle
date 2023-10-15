@@ -9,8 +9,7 @@ import SwiftUI
 
 struct DrawingView: View {
     @State private var drawing = Drawing()
-    @State private var selectedColor = Color.black
-    let penColors: [Color] = [.black, .red, .green, .blue, .orange]
+    var colorSelector = ColorSelector()
     
     var body: some View {
         HStack {
@@ -27,43 +26,28 @@ struct DrawingView: View {
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged({ value in
                     let newPoint = value.location
-                    drawing.addPoint(point: newPoint)
+                    drawing.addPoint(point: newPoint, color: colorSelector.selectedColor)
                 })
                     .onEnded({ value in
-                        self.drawing.newLine()
+                        self.drawing.newLine(color: colorSelector.selectedColor)
                     }))
+            colorSelector
         }
     }
 }
-
-struct ColorButton: View {
-    var color: Color
-    var isSelected: Bool
-    
-    var body: some View {
-        color
-            .frame(width: 40, height: 40)
-            .cornerRadius(20)
-            .overlay(
-                Circle()
-                    .stroke(isSelected ? Color.black : Color.clear, lineWidth: 2)
-            )
-    }
-}
-
 
 struct Drawing {
     var lines: [Line] = []
     
-    mutating func addPoint(point: CGPoint) {
+    mutating func addPoint(point: CGPoint, color: Color) {
         if lines.isEmpty {
-            lines.append(Line(color: .black))
+            lines.append(Line(color: color))
         }
         lines[lines.count - 1].points.append(point)
     }
     
-    mutating func newLine() {
-        lines.append(Line(color: .black))
+    mutating func newLine(color: Color) {
+        lines.append(Line(color: color))
     }
 }
 
