@@ -13,60 +13,26 @@ struct DrawingView: View {
     let penColors: [Color] = [.black, .red, .green, .blue, .orange]
     
     var body: some View {
-        NavigationView {
-            HStack {
-                ZStack {
-                    // Left side: Canvas for drawing
-                    Rectangle()
-                    .stroke(Color.black, lineWidth: 2) // Border
-                    .background(Color.white)
-                    CanvasView(drawing: $drawing, penColor: selectedColor)
-                        .background(Color.white)
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { value in
-                                    drawing.addPoint(point: value.location)
-                                }
-                        )
-                        .border(Color.black, width: 5)
-                        .frame(width: 100, height: 280, alignment: .leading)
+        HStack {
+            Canvas { context, size in
+                for line in drawing.lines {
+                    var path = Path()
+                    path.addLines(line.points)
+                    context.stroke(path,
+                                   with: .color(line.color),
+                                   lineWidth: line.width)
                 }
-
-                // Right side: Panel for selecting pen color
-                VStack {
-                    Text("Pen Colors")
-                        .font(.headline)
-                        .padding()
-                    ForEach(penColors, id: \.self) { color in
-                        ColorButton(color: color, isSelected: color == selectedColor)
-                            .onTapGesture {
-                                selectedColor = color
-                            }
-                    }
-                }
-                .padding()
-                .frame(width: 130, alignment: .trailing)
             }
+            .background(.white)
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onChanged({ value in
+                    let newPoint = value.location
+                    drawing.addPoint(point: newPoint)
+                })
+                    .onEnded({ value in
+                        self.drawing.newLine()
+                    }))
         }
-    }
-}
-
-struct CanvasView: View {
-    @Binding var drawing: Drawing
-    var penColor: Color
-    
-    var body: some View {
-        ZStack {
-            ForEach(drawing.lines) { line in
-                Path { path in
-                    for point in line.points {
-                        path.addLine(to: point)
-                    }
-                }
-                .stroke(line.color, lineWidth: line.width)
-            }
-        }
-        .drawingGroup()
     }
 }
 
@@ -95,13 +61,17 @@ struct Drawing {
         }
         lines[lines.count - 1].points.append(point)
     }
+    
+    mutating func newLine() {
+        lines.append(Line(color: .black))
+    }
 }
 
 struct Line: Identifiable {
     var id = UUID()
-    var color: Color
+    var color: Color = .white
     var points: [CGPoint] = []
-    var width: CGFloat = 5
+    var width: CGFloat = 1.0
 }
 
 #Preview {
