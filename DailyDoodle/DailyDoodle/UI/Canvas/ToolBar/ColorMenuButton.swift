@@ -15,7 +15,7 @@ struct ColorMenuButton: View {
     var body: some View {
         VStack {
             Button(action: {
-                withAnimation {
+                withAnimation(Animation.easeInOut(duration: 0.5)) {
                     isSelectorExpanded.toggle()
                 }
             }) {
