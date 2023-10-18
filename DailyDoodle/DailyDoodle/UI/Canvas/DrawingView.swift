@@ -33,7 +33,7 @@ struct DrawingView: View {
                     }))
             HStack {
                 Spacer()
-                ColorSelector(selectedColor: $colorSelected)
+                ColorMenuButton(selectedColor: $colorSelected)
             }
             
         }
