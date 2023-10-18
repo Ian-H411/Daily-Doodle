@@ -9,10 +9,10 @@ import SwiftUI
 
 struct DrawingView: View {
     @State private var drawing = Drawing()
-    var colorSelector = ColorSelector()
+    @State var colorSelected: Color = .black
     
     var body: some View {
-        HStack {
+        ZStack {
             Canvas { context, size in
                 for line in drawing.lines {
                     var path = Path()
@@ -26,12 +26,16 @@ struct DrawingView: View {
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged({ value in
                     let newPoint = value.location
-                    drawing.addPoint(point: newPoint, color: colorSelector.selectedColor)
+                    drawing.addPoint(point: newPoint, color: colorSelected)
                 })
                     .onEnded({ value in
-                        self.drawing.newLine(color: colorSelector.selectedColor)
+                        self.drawing.newLine(color: colorSelected)
                     }))
-            colorSelector
+            HStack {
+                Spacer()
+                ColorSelector(selectedColor: $colorSelected)
+            }
+            
         }
     }
 }
@@ -44,6 +48,7 @@ struct Drawing {
             lines.append(Line(color: color))
         }
         lines[lines.count - 1].points.append(point)
+        lines[lines.count - 1].color = color
     }
     
     mutating func newLine(color: Color) {

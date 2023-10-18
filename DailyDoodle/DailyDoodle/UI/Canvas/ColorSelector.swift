@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorSelector: View {
     let penColors: [Color] = [.black, .red, .green, .blue, .orange]
-    @State var selectedColor: Color = .black
+    @Binding var selectedColor: Color
     
     var body: some View {
         VStack {
@@ -41,7 +41,3 @@ struct ColorButton: View {
             )
     }
 }
-
-#Preview(body: {
-    ColorSelector()
-})
