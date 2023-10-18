@@ -16,6 +16,7 @@ struct ColorSelector: View {
             Text("Pen Colors")
                 .font(.headline)
                 .padding()
+                .foregroundStyle(.black)
             ForEach(penColors, id: \.self) { color in
                 ColorButton(color: color, isSelected: color == selectedColor)
                     .onTapGesture {
