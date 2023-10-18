@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ColorMenuButton: View {
-    @State var isSelectorExpanded = false
+    @Binding var isSelectorExpanded: Bool
     @Binding var selectedColor: Color
+    @Binding var strokeWidth: Double
+    
     var body: some View {
         VStack {
             Button(action: {
@@ -24,9 +26,10 @@ struct ColorMenuButton: View {
             if isSelectorExpanded {
                 ColorSelector(selectedColor: $selectedColor)
                     .frame(width: 100)
+                StrokeWidthSelector(value: $strokeWidth)
+            } else {
+                Spacer()
             }
-            
-            Spacer()
         }
     }
 }
