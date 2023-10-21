@@ -24,7 +24,7 @@ struct ColorMenuButton: View {
             }
             
             if isSelectorExpanded {
-                ColorSelector(selectedColor: $selectedColor)
+                ColorSelector(currentColor: $selectedColor)
                     .frame(width: 100)
                 StrokeWidthSelector(value: $strokeWidth)
             } else {

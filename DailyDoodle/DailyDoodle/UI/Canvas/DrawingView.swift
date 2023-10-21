@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DrawingView: View {
     @State private var drawing = Drawing()
-    @State var colorSelected: Color = .black
+    @State var colorSelected: Color = .red
     @State var strokeWidth: Double = 12.5
     @State var isColorMenuDisplayed: Bool = false
     
@@ -36,9 +36,8 @@ struct DrawingView: View {
                     }))
             HStack {
                 Spacer()
-                ColorMenuButton(isSelectorExpanded: $isColorMenuDisplayed,
-                                selectedColor: $colorSelected,
-                                strokeWidth: $strokeWidth)
+                ColorSelector(currentColor: $colorSelected)
+                    .frame(width: 50, height: 500 ,alignment: .top)
             }
             
         }
