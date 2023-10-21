@@ -38,14 +38,15 @@ struct ColorSelector: View {
                             .onChanged { value in
                                 let offsetY = value.location.y
                                 let totalHeight: CGFloat = 200
-                                let percentage = 1.0 - min(max(offsetY / totalHeight, 0.0), 1.0)
+                                let colorValueForTracking = min(max(offsetY / totalHeight, 0.0), 1.0) - 0.5
+                                let percentage = colorValueForTracking + 0.5
                                 let sectionCount = colorArray.count - 1
                                 let sectionSize = 1.0 / Double(sectionCount)
                                 let section = min(max(Int(percentage / sectionSize), 0), sectionCount - 1)
                                 let sectionPercentage = (percentage - (sectionSize * Double(section))) / sectionSize
                                 let newColor = colorArray[section].interpolateColor(to: colorArray[section + 1], percentage: sectionPercentage)
                                 currentColor = newColor
-                                self.colorValue = Double(percentage)
+                                self.colorValue = Double(colorValueForTracking)
                             }
                     )
             }
