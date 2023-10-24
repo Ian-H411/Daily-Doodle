@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B77A5B02AE415B500F05A2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B77A5AF2AE415B500F05A2A /* GoogleService-Info.plist */; };
+		6B77A5B32AE418D400F05A2A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B22AE418D400F05A2A /* FirebaseAnalytics */; };
+		6B77A5B52AE418D400F05A2A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B42AE418D400F05A2A /* FirebaseAnalyticsSwift */; };
+		6B77A5B72AE418D400F05A2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B62AE418D400F05A2A /* FirebaseAuth */; };
+		6B77A5B92AE418D400F05A2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B82AE418D400F05A2A /* FirebaseFirestore */; };
+		6B77A5BB2AE418D400F05A2A /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5BA2AE418D400F05A2A /* FirebaseFirestoreSwift */; };
 		6B9B6CFE2ADA1F8000C1C233 /* DailyDoodleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B6CFD2ADA1F8000C1C233 /* DailyDoodleApp.swift */; };
 		6B9B6D002ADA1F8000C1C233 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9B6CFF2ADA1F8000C1C233 /* ContentView.swift */; };
 		6B9B6D022ADA1F8100C1C233 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B6D012ADA1F8100C1C233 /* Assets.xcassets */; };
@@ -23,6 +29,7 @@
 		6D410B102AE1B33F00C6A001 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D410B0F2AE1B33F00C6A001 /* LandingView.swift */; };
 		6D410B122AE1B36700C6A001 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D410B112AE1B36700C6A001 /* CreateAccountView.swift */; };
 		6D410B142AE1B37800C6A001 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D410B132AE1B37800C6A001 /* ResetPasswordView.swift */; };
+		6BD24B962ADF8B8800B4FC10 /* EraserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD24B952ADF8B8800B4FC10 /* EraserButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B77A5AF2AE415B500F05A2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6B9B6CFA2ADA1F8000C1C233 /* DailyDoodle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDoodle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B6CFD2ADA1F8000C1C233 /* DailyDoodleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDoodleApp.swift; sourceTree = "<group>"; };
 		6B9B6CFF2ADA1F8000C1C233 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +78,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B77A5BB2AE418D400F05A2A /* FirebaseFirestoreSwift in Frameworks */,
+				6B77A5B52AE418D400F05A2A /* FirebaseAnalyticsSwift in Frameworks */,
+				6B77A5B92AE418D400F05A2A /* FirebaseFirestore in Frameworks */,
+				6B77A5B72AE418D400F05A2A /* FirebaseAuth in Frameworks */,
+				6B77A5B32AE418D400F05A2A /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +131,7 @@
 				6B9B6D282ADA220100C1C233 /* UI */,
 				6B9B6CFD2ADA1F8000C1C233 /* DailyDoodleApp.swift */,
 				6B9B6D012ADA1F8100C1C233 /* Assets.xcassets */,
+				6B77A5AF2AE415B500F05A2A /* GoogleService-Info.plist */,
 				6B9B6D032ADA1F8100C1C233 /* DailyDoodle.entitlements */,
 				6B9B6D042ADA1F8100C1C233 /* Preview Content */,
 			);
@@ -173,6 +187,7 @@
 				6BD24B902ADF822000B4FC10 /* ColorMenuButton.swift */,
 				6BD24B8E2ADC4F2400B4FC10 /* ColorSelector.swift */,
 				6BD24B932ADF82A600B4FC10 /* StrokeWidthSelector.swift */,
+				6BD24B952ADF8B8800B4FC10 /* EraserButton.swift */,
 			);
 			path = ToolBar;
 			sourceTree = "<group>";
@@ -212,6 +227,13 @@
 			dependencies = (
 			);
 			name = DailyDoodle;
+			packageProductDependencies = (
+				6B77A5B22AE418D400F05A2A /* FirebaseAnalytics */,
+				6B77A5B42AE418D400F05A2A /* FirebaseAnalyticsSwift */,
+				6B77A5B62AE418D400F05A2A /* FirebaseAuth */,
+				6B77A5B82AE418D400F05A2A /* FirebaseFirestore */,
+				6B77A5BA2AE418D400F05A2A /* FirebaseFirestoreSwift */,
+			);
 			productName = DailyDoodle;
 			productReference = 6B9B6CFA2ADA1F8000C1C233 /* DailyDoodle.app */;
 			productType = "com.apple.product-type.application";
@@ -284,6 +306,9 @@
 				Base,
 			);
 			mainGroup = 6B9B6CF12ADA1F8000C1C233;
+			packageReferences = (
+				6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 6B9B6CFB2ADA1F8000C1C233 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -302,6 +327,7 @@
 			files = (
 				6B9B6D062ADA1F8100C1C233 /* Preview Assets.xcassets in Resources */,
 				6B9B6D022ADA1F8100C1C233 /* Assets.xcassets in Resources */,
+				6B77A5B02AE415B500F05A2A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +357,7 @@
 				6B9B6D002ADA1F8000C1C233 /* ContentView.swift in Sources */,
 				6B9B6CFE2ADA1F8000C1C233 /* DailyDoodleApp.swift in Sources */,
 				6D410B122AE1B36700C6A001 /* CreateAccountView.swift in Sources */,
+				6BD24B962ADF8B8800B4FC10 /* EraserButton.swift in Sources */,
 				6BD24B8F2ADC4F2400B4FC10 /* ColorSelector.swift in Sources */,
 				6BD24B912ADF822000B4FC10 /* ColorMenuButton.swift in Sources */,
 				6D410B142AE1B37800C6A001 /* ResetPasswordView.swift in Sources */,
@@ -685,6 +712,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6B77A5B22AE418D400F05A2A /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		6B77A5B42AE418D400F05A2A /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		6B77A5B62AE418D400F05A2A /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		6B77A5B82AE418D400F05A2A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		6B77A5BA2AE418D400F05A2A /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B77A5B12AE418D400F05A2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6B9B6CF22ADA1F8000C1C233 /* Project object */;
 }

@@ -14,6 +14,7 @@ struct StrokeWidthSelector: View {
         VStack {
             Text("Value: \(value, specifier: "%.1f")")
                 .padding()
+                .foregroundStyle(.black)
 
             Slider(value: $value, in: 5...20)
                 .rotationEffect(.degrees(-90))
