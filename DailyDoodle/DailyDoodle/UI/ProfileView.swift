@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ProfileView: View {
+    //TODO: -- replace with non static profile 
+    @State var userProfile: UserProfile = UserProfile(json: [String: Any]())
     
     var body: some View {
         ScrollView {
             ProfileHeaderView()
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 3), alignment: .leading, spacing: 0) {
                 ForEach(0..<20, id: \.self) { index in
-                    DrawingDisplayView(drawing: )
+                    let drawing = userProfile.drawings[index]
+                    DrawingDisplayView(drawing: drawing)
                 }
             }
         }
@@ -62,6 +65,6 @@ struct DrawingDisplayView: View {
     }
 }
 
-#Preview(body: {
+#Preview(
     ProfileView()
 })
