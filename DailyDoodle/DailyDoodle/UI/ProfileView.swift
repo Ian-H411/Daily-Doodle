@@ -65,6 +65,6 @@ struct DrawingDisplayView: View {
     }
 }
 
-#Preview(
+#Preview(body: {
     ProfileView()
 })
