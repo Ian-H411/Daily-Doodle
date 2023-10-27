@@ -9,7 +9,10 @@ import Foundation
 
 class UserViewModel  {
     
-    var identifier: String
+    let identifier: String
+    let userName: String
+    let email: String
+    var userDescription: String
     
     var friendIDs: [String]
     var friends: [UserViewModel]

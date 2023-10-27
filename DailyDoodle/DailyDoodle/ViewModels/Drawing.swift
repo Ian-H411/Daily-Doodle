@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Drawing {
+    let authorID: String?
     var lines: [Line] = []
     
     mutating func addPoint(point: CGPoint, color: Color, strokeWidth: Double) {
