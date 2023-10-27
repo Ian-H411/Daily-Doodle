@@ -8,13 +8,24 @@
 import FirebaseFirestore
 import FirebaseAuth
 
+struct FireBaseConstants {
+    static let usersCollectionPath = "users"
+    
+    static let userName = "userName"
+    static let email = "email"
+    static let drawingIds = "drawingIDs"
+    static let friendIDs = "friendIDs"
+    static let userDescription = "userDescription"
+}
+
 class UserNetworkManager {
     
     static let shared = UserNetworkManager()
     
+    private let db = Firestore.firestore()
+    
     func createUser(user: UserViewModel) {
-        let db = Firestore.firestore()
-        let usersCollection = db.collection("users")
+        let usersCollection = db.collection(FireBaseConstants.usersCollectionPath)
         
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -23,11 +34,11 @@ class UserNetworkManager {
         let userDocument = usersCollection.document(userID)
         
         let userData: [String: Any] = [
-            "username": user.userName,
-            "email": user.email,
-            "drwaingIDs": user.drawingIDs,
-            "friends": user.friendIDs,
-            "userDescription": user.userDescription
+            FireBaseConstants.userName: user.userName,
+            FireBaseConstants.email: user.email,
+            FireBaseConstants.drawingIds: user.drawingIDs,
+            FireBaseConstants.friendIDs: user.friendIDs,
+            FireBaseConstants.userDescription: user.userDescription
         ]
         
         userDocument.setData(userData) { error in
@@ -35,6 +46,30 @@ class UserNetworkManager {
                 print("Error saving user data: \(error.localizedDescription)")
             } else {
                 print("User data saved successfully!")
+            }
+        }
+    }
+    
+    func getUserFrom(id: String, completionHandler: @escaping (UserViewModel?) -> Void) {
+        let userCollection = db.collection(FireBaseConstants.userName)
+        let userDocument = userCollection.document(id)
+        
+        userDocument.getDocument { document, error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+                completionHandler(nil)
+                return
+            }
+            if let document = document,
+                document.exists,
+                let data = document.data() {
+                let user = UserViewModel(json: data, identifier: id)
+                completionHandler(user)
+                return
+            } else {
+                print("Unable to parse document for user retrieval by ID")
+                completionHandler(nil)
+                return
             }
         }
     }
