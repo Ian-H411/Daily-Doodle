@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B5AC7912AEC54A600688B64 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AC7902AEC54A600688B64 /* Drawing.swift */; };
+		6B5AC7942AEC54CF00688B64 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AC7932AEC54CF00688B64 /* UserViewModel.swift */; };
 		6B77A5B02AE415B500F05A2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B77A5AF2AE415B500F05A2A /* GoogleService-Info.plist */; };
 		6B77A5B32AE418D400F05A2A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B22AE418D400F05A2A /* FirebaseAnalytics */; };
 		6B77A5B52AE418D400F05A2A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6B77A5B42AE418D400F05A2A /* FirebaseAnalyticsSwift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B5AC7902AEC54A600688B64 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		6B5AC7932AEC54CF00688B64 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		6B77A5AF2AE415B500F05A2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6B9B6CFA2ADA1F8000C1C233 /* DailyDoodle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyDoodle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9B6CFD2ADA1F8000C1C233 /* DailyDoodleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDoodleApp.swift; sourceTree = "<group>"; };
@@ -101,11 +105,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6B5AC78F2AEC53C900688B64 /* New Group */ = {
+		6B5AC78F2AEC53C900688B64 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6B5AC7902AEC54A600688B64 /* Drawing.swift */,
+				6B5AC7932AEC54CF00688B64 /* UserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6B5AC7922AEC54B400688B64 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "New Group";
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		6B9B6CF12ADA1F8000C1C233 = {
@@ -131,7 +144,8 @@
 		6B9B6CFC2ADA1F8000C1C233 /* DailyDoodle */ = {
 			isa = PBXGroup;
 			children = (
-				6B5AC78F2AEC53C900688B64 /* New Group */,
+				6B5AC7922AEC54B400688B64 /* Networking */,
+				6B5AC78F2AEC53C900688B64 /* ViewModels */,
 				6D410B0C2AE1B30B00C6A001 /* Login */,
 				6D410B092AE1B12E00C6A001 /* Design */,
 				6B9B6D282ADA220100C1C233 /* UI */,
@@ -364,6 +378,8 @@
 				6BD24B8F2ADC4F2400B4FC10 /* ColorSelector.swift in Sources */,
 				6BD24B912ADF822000B4FC10 /* ColorMenuButton.swift in Sources */,
 				6D410B142AE1B37800C6A001 /* ResetPasswordView.swift in Sources */,
+				6B5AC7912AEC54A600688B64 /* Drawing.swift in Sources */,
+				6B5AC7942AEC54CF00688B64 /* UserViewModel.swift in Sources */,
 				6B9B6D2A2ADA23E600C1C233 /* DrawingView.swift in Sources */,
 				6D410B0E2AE1B31A00C6A001 /* LoginView.swift in Sources */,
 				6BD24B942ADF82A600B4FC10 /* StrokeWidthSelector.swift in Sources */,
