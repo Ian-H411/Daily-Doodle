@@ -41,6 +41,29 @@ class DrawingNetworkManager {
         }
     }
     
+    func retrieveDrawingsWith(drawingIDs: [String], completionHandler: @escaping ([Drawing]?) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else {completionHandler(nil); return }
+        let drawingCollection = db.collection(FireBaseUserConstants.usersCollectionPath).document(userID).collection(FireBaseDrawingConstants.drawingsCollectionPath)
+        
+        drawingCollection.whereField(FieldPath.documentID(), in: drawingIDs).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting user data: \(error.localizedDescription)")
+                completionHandler(nil)
+                return
+            } else {
+                var drawings: [Drawing] = []
+                guard let documents = querySnapshot?.documents else { completionHandler(nil); return }
+                for document in documents{
+                    let data = document.data()
+                    guard let drawing = self.dictionaryToDrawing(dictionary: data) else { continue }
+                    drawings.append(drawing)
+                }
+                completionHandler(drawings)
+                return
+            }
+        }
+    }
+    
     private func drawingToDictionary(drawing: Drawing) -> [String: Any] {
         var linesArray = [[String: Any]]()
         for line in drawing.lines {
