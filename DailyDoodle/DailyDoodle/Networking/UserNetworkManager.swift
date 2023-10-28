@@ -8,7 +8,7 @@
 import FirebaseFirestore
 import FirebaseAuth
 
-struct FireBaseConstants {
+struct FireBaseUserConstants {
     static let usersCollectionPath = "users"
     
     static let userName = "userName"
@@ -25,7 +25,7 @@ class UserNetworkManager {
     private let db = Firestore.firestore()
     
     func createUser(user: UserViewModel) {
-        let usersCollection = db.collection(FireBaseConstants.usersCollectionPath)
+        let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
         
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -34,11 +34,11 @@ class UserNetworkManager {
         let userDocument = usersCollection.document(userID)
         
         let userData: [String: Any] = [
-            FireBaseConstants.userName: user.userName,
-            FireBaseConstants.email: user.email,
-            FireBaseConstants.drawingIds: user.drawingIDs,
-            FireBaseConstants.friendIDs: user.friendIDs,
-            FireBaseConstants.userDescription: user.userDescription
+            FireBaseUserConstants.userName: user.userName,
+            FireBaseUserConstants.email: user.email,
+            FireBaseUserConstants.drawingIds: user.drawingIDs,
+            FireBaseUserConstants.friendIDs: user.friendIDs,
+            FireBaseUserConstants.userDescription: user.userDescription
         ]
         
         userDocument.setData(userData) { error in
@@ -51,7 +51,7 @@ class UserNetworkManager {
     }
     
     func getUserFrom(id: String, completionHandler: @escaping (UserViewModel?) -> Void) {
-        let userCollection = db.collection(FireBaseConstants.usersCollectionPath)
+        let userCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
         let userDocument = userCollection.document(id)
         
         userDocument.getDocument { document, error in
@@ -75,7 +75,7 @@ class UserNetworkManager {
     }
     
     func retrieveFriendsWith(IDs: [String], completionHandler: @escaping ([UserViewModel]?) -> Void) {
-        let usersCollection = db.collection(FireBaseConstants.usersCollectionPath)
+        let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
         
         usersCollection.whereField(FieldPath.documentID(), in: IDs).getDocuments { (querySnapshot, error) in
             if let error = error {

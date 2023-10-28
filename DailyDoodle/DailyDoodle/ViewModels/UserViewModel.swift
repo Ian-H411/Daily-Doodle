@@ -32,11 +32,11 @@ class UserViewModel  {
     }
     
     convenience init (json: [String: Any], identifier: String) {
-        let username = json[FireBaseConstants.userName] as? String ?? ""
-        let email = json[FireBaseConstants.email] as? String ?? ""
-        let userDescription = json[FireBaseConstants.userDescription] as? String ?? ""
-        let friendIDs = json[FireBaseConstants.friendIDs] as? [String] ?? [String]()
-        let drawingIDs = json[FireBaseConstants.drawingIds] as? [String] ?? [String]()
+        let username = json[FireBaseUserConstants.userName] as? String ?? ""
+        let email = json[FireBaseUserConstants.email] as? String ?? ""
+        let userDescription = json[FireBaseUserConstants.userDescription] as? String ?? ""
+        let friendIDs = json[FireBaseUserConstants.friendIDs] as? [String] ?? [String]()
+        let drawingIDs = json[FireBaseUserConstants.drawingIds] as? [String] ?? [String]()
         
         self.init(identifier: identifier,
                   userName: username,
