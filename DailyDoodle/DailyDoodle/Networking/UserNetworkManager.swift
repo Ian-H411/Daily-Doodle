@@ -51,7 +51,7 @@ class UserNetworkManager {
     }
     
     func getUserFrom(id: String, completionHandler: @escaping (UserViewModel?) -> Void) {
-        let userCollection = db.collection(FireBaseConstants.userName)
+        let userCollection = db.collection(FireBaseConstants.usersCollectionPath)
         let userDocument = userCollection.document(id)
         
         userDocument.getDocument { document, error in
@@ -61,14 +61,35 @@ class UserNetworkManager {
                 return
             }
             if let document = document,
-                document.exists,
-                let data = document.data() {
+               document.exists,
+               let data = document.data() {
                 let user = UserViewModel(json: data, identifier: id)
                 completionHandler(user)
                 return
             } else {
                 print("Unable to parse document for user retrieval by ID")
                 completionHandler(nil)
+                return
+            }
+        }
+    }
+    
+    func retrieveFriendsWith(IDs: [String], completionHandler: @escaping ([UserViewModel]?) -> Void) {
+        let usersCollection = db.collection(FireBaseConstants.usersCollectionPath)
+        
+        usersCollection.whereField(FieldPath.documentID(), in: IDs).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting user data: \(error.localizedDescription)")
+                completionHandler(nil)
+                return
+            } else {
+                var retrievedUsers: [UserViewModel] = []
+                guard let documents = querySnapshot?.documents else { completionHandler(nil); return }
+                for document in documents{
+                    let data = document.data() 
+                    retrievedUsers.append(UserViewModel(json: data, identifier: document.documentID))
+                }
+                completionHandler(retrievedUsers)
                 return
             }
         }
