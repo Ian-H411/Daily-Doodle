@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct Drawing {
-    let authorID: String?
+struct Drawing: Identifiable {
+    var id = UUID()
     var lines: [Line] = []
     
     mutating func addPoint(point: CGPoint, color: Color, strokeWidth: Double) {
