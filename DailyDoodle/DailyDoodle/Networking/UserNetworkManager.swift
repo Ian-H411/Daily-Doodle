@@ -24,6 +24,7 @@ class UserNetworkManager {
     
     private let db = Firestore.firestore()
     
+    //MARK: - Create User in DB
     func createUser(user: UserViewModel) {
         let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
         
@@ -50,6 +51,7 @@ class UserNetworkManager {
         }
     }
     
+    //MARK: - Retrieval functions
     func getUserFrom(id: String, completionHandler: @escaping (UserViewModel?) -> Void) {
         let userCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
         let userDocument = userCollection.document(id)
@@ -92,6 +94,56 @@ class UserNetworkManager {
                 completionHandler(retrievedUsers)
                 return
             }
+        }
+    }
+    
+    //MARK: - Update functions
+    func updateFriend(IDs: [String]) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
+        let document = usersCollection.document(userID)
+        let updateData: [String: Any] = [
+            FireBaseUserConstants.friendIDs: IDs
+        ]
+        document.updateData(updateData) { error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            } else {
+                print("Update successful")
+            }
+        }
+    }
+    
+    func updateDescription(description: String) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
+        let document = usersCollection.document(userID)
+        let updateData: [String: Any] = [
+            FireBaseUserConstants.userDescription: description
+        ]
+        document.updateData(updateData) { error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            } else {
+                print("Successul update of description")
+            }
+        }
+    }
+    
+    //MARK: - Delete
+    func deleteUser(completionHandler: @escaping (Bool) -> Void) {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let usersCollection = db.collection(FireBaseUserConstants.usersCollectionPath)
+        let document = usersCollection.document(userID)
+        document.delete { error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+                completionHandler(false)
+            } else {
+                print("SuccessfulDeletion")
+                completionHandler(true)
+            }
+            return
         }
     }
 }
